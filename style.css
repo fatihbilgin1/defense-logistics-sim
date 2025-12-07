@@ -1,0 +1,254 @@
+/* --- 1. TEMEL AYARLAR VE RENK PALETİ --- */
+:root {
+    --ana-renk: #00ff41;        /* Matrix Yeşili */
+    --ana-renk-silik: rgba(0, 255, 65, 0.2);
+    --arkaplan: #050505;        /* Zifiri Karanlık */
+    --panel-ici: #0a0a0a;
+    --uyari: #ff3333;           /* Kritik Kırmızı */
+    --cerceve-kalinlik: 1px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Scrollbar Tasarımı (Kayıt Çubuğu) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000; 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--ana-renk); 
+    border-radius: 4px;
+}
+
+/* --- 2. GÖVDE VE ARKA PLAN (RADAR EFEKTİ) --- */
+body {
+    background-color: var(--arkaplan);
+    color: var(--ana-renk);
+    font-family: 'Courier New', Courier, monospace; /* Daktilo Fontu */
+    height: 100vh;
+    overflow: hidden;
+    /* İnce Izgara Deseni */
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-left: 1px solid var(--ana-renk-silik);
+    border-right: 1px solid var(--ana-renk-silik);
+}
+
+/* --- 3. HEADER (ÜST PANEL) --- */
+.header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 2px solid var(--ana-renk);
+    background: linear-gradient(to bottom, #000, rgba(0, 255, 65, 0.05));
+    text-shadow: 0 0 10px var(--ana-renk); /* Neon Parlama */
+}
+
+.header h1 {
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.budget {
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid var(--ana-renk);
+    padding: 10px 20px;
+    background: black;
+    box-shadow: 0 0 15px var(--ana-renk-silik);
+}
+
+/* --- 4. FİLTRE BUTONLARI --- */
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    border-bottom: 1px solid var(--ana-renk-silik);
+    background: rgba(0,0,0,0.8);
+}
+
+.filter-buttons button {
+    background: transparent;
+    border: 1px solid var(--ana-renk);
+    color: var(--ana-renk);
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background: var(--ana-renk);
+    color: black;
+    box-shadow: 0 0 15px var(--ana-renk);
+}
+
+/* --- 5. ANA İÇERİK (SAVAŞ ALANI) --- */
+.main-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden; /* Taşmayı engelle */
+}
+
+/* SOL PANEL: KATALOG */
+.supply-catalog {
+    flex: 2;
+    padding: 20px;
+    overflow-y: auto; /* Sadece burası kaydırılsın */
+    display: grid;
+    /* Kartları ekran boyutuna göre otomatik diz */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 20px;
+    border-right: 2px solid var(--ana-renk);
+}
+
+/* ÜRÜN KARTI (CARD) TASARIMI */
+.card {
+    background: rgba(0, 20, 0, 0.6);
+    border: 1px solid var(--ana-renk-silik);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--ana-renk-silik);
+    border-color: var(--ana-renk);
+}
+
+.card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2); /* Siyah Beyaz Efekt */
+    border-bottom: 1px solid var(--ana-renk-silik);
+    margin-bottom: 5px;
+    transition: filter 0.3s;
+}
+
+.card:hover img {
+    filter: grayscale(0%) contrast(1); /* Hover olunca renklenir */
+}
+
+.card h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.card .category {
+    font-size: 12px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.price-stock {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card button {
+    margin-top: auto; /* Butonu en alta it */
+    background: black;
+    border: 1px solid var(--ana-renk);
+    color: var(--ana-renk);
+    padding: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.card button:hover {
+    background: var(--ana-renk);
+    color: black;
+}
+
+/* SAĞ PANEL: ENVANTER */
+.inventory-section {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.5);
+}
+
+.inventory-section h2 {
+    border-bottom: 1px dashed var(--ana-renk);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.inventory-section ul {
+    list-style: none;
+}
+
+.inventory-section li {
+    background: rgba(0, 255, 65, 0.05);
+    border-left: 3px solid var(--ana-renk);
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between; /* Yazıları iki uca yasla */
+    align-items: center;
+}
+
+/* --- 6. ALT PANEL (MONTAJ BUTONU) --- */
+.control-panel {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--ana-renk);
+    background: #000;
+}
+
+.control-panel button {
+    background: transparent;
+    border: 2px solid var(--ana-renk);
+    color: var(--ana-renk);
+    font-size: 20px;
+    padding: 15px 50px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: 0 0 20px var(--ana-renk-silik);
+    transition: 0.3s;
+}
+
+.control-panel button:hover {
+    background: var(--ana-renk);
+    color: black;
+    box-shadow: 0 0 40px var(--ana-renk);
+    transform: scale(1.05);
+}

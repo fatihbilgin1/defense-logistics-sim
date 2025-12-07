@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript ile geliştirilmiş Envanter Yönetimi ve Kaynak Planlama Simülasyonu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Savunma Lojistik Sistemi</h1>
+            <div class="budget">
+                <span></span>
+            </div>
+        </div>
+        <div class="filter-buttons">
+            <button onclick="filtrele('Tümü')">Tümü</button>
+            <button onclick="filtrele('Motor')">Motor</button>
+            <button onclick="filtrele('Gövde')">Gövde</button>
+            <button onclick="filtrele('Optik')">Optik</button>
+            <button onclick="filtrele('Silah')">Silah</button>
+        </div>
+        <div class="main-content">
+
+            <div class="supply-catalog">
+            </div>
+            <div class="inventory-section">
+            </div>
+
+        </div>
+        <div class="control-panel">
+            <button>Montajı Başlat</button>
+        </div>
+
+        <script src="app.js"></script>
+</body>
+
+</html>
